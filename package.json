@@ -1,0 +1,22 @@
+{
+  "name": "xantus",
+  "version": "1.0.0",
+  "description": "Self-hosted IRC-like commandline messaging system using websockets, made in node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MightySpaceman/xantus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MightySpaceman/xantus/issues"
+  },
+  "homepage": "https://github.com/MightySpaceman/xantus#readme",
+  "dependencies": {
+    "terminal-kit": "^3.0.0"
+  }
+}
