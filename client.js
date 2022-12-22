@@ -18,12 +18,12 @@ sock.onmessage = function(event) {
   term.eraseLine();
   term.red(`<${sock._socket.remoteAddress}>: ${event.data}`);
   term.moveTo(1, term.height);
-  term.green("\nYou: ");
+  term.green("\n<You>: ");
 };
 
 // Main loop to be executed recursively
 function mainLoop() {
-  term.green("\nYou: ");
+  term.green("\n<You>: ");
   term.inputField((error , input) => {
         sock.send(input);
         mainLoop();

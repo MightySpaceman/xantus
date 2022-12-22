@@ -12,13 +12,16 @@ term.on('key', function(name, matches, data) {
 wss.on('connection', function connection(ws) {
   mainLoop(ws);
   ws.on('message', function incoming(message) {
-    console.log(`\n${ws._socket.remoteAddress}: ${message}`);
+    term.eraseLine();
+    term.red(`<${ws._socket.remoteAddress}>: ${message}`);
+    term.moveTo(1, term.height);
+    term.green("\n<You>: ");
   });
 });
 
 // Main loop to be executed recursively
 function mainLoop(ws) {
-  term.green("\nYou: ");
+  term.green("\n<You>: ");
   term.inputField((error , input) => {
         ws.send(input);
         mainLoop(ws);
