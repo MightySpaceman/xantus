@@ -1,11 +1,11 @@
 const WebSocket = require('ws');
 const term = require('terminal-kit').terminal;
 
-function client(ip) {
+function client(ip, port) {
 
   term.blue("\nAttempting to connect...");
 
-  const sock = new WebSocket(`ws://${ip}:9000`);
+  const sock = new WebSocket(`ws://${ip}:${port}`);
 
   // When the connection is established, stop the spinner and begin the sending loop (aka recursion fun fun time)
   sock.onopen = function() {

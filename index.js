@@ -33,13 +33,19 @@ term.singleColumnMenu(menuOptions, (error, response) => {
         
         case "Join specific IP":
             term.blue("\nIP adress: ")
-            term.inputField((error, input) => {
-                    client(input);
+            term.inputField((error, ip) => {
+                    term.blue("\nPort: ");
+                    term.inputField((error, port) => {
+                        client(ip, port);
+                    });
             });
             break;
             
         case "Host room":
-            server();
+            term.blue("\nPort to host on: ")
+            term.inputField((error, port) => {
+                server(port);
+            })
 
             break;
     }

@@ -1,9 +1,9 @@
 const WebSocket = require('ws');
 const term = require('terminal-kit').terminal;
 
-function server() {
+function server(port) {
 
-const wss = new WebSocket.Server({ port: 9000 });
+const wss = new WebSocket.Server({ port: port });
 term.blue("\nLooking for connections...");
 
 wss.on('connection', function connection(ws) {
