@@ -1,18 +1,16 @@
 const WebSocket = require('ws');
 const term = require('terminal-kit').terminal;
 
+function server() {
+
 const wss = new WebSocket.Server({ port: 9000 });
-
-// Close the script when the user presses CTRL_C
-term.on('key', function(name, matches, data) {
-  if (name == "CTRL_C") { console.log("\nExited."), process.exit(); }
-});
-
+term.blue("Looking for connections...");
 
 wss.on('connection', function connection(ws) {
+  term.green(`\nSuccesful connection from ${ws._socket.remoteAddress}\n`)
   mainLoop(ws);
   ws.on('message', function incoming(message) {
-    term.eraseLine();
+    term.moveTo(1, term.height);
     term.red(`<${ws._socket.remoteAddress}>: ${message}`);
     term.moveTo(1, term.height);
     term.green("\n<You>: ");
@@ -28,3 +26,7 @@ function mainLoop(ws) {
     }
   );
 }
+
+}
+
+module.exports = { server };

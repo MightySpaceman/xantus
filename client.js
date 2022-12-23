@@ -1,33 +1,40 @@
 const WebSocket = require('ws');
 const term = require('terminal-kit').terminal;
-const sock = new WebSocket('ws://localhost:9000');
 
-// Close the script when the user presses CTRL_C
-term.on('key', function(name, matches, data) {
-  if (name == "CTRL_C") { console.log("\nExited."), process.exit(); }
-});
+function client(ip) {
 
-// When the connection is established, begin the sending loop (aka recursion fun fun time)
-sock.onopen = function() {
-  console.log('Socket succesfully connected.');
-  mainLoop();
-};
+  term.blue("Attempting to connect...");
 
-// Display received message when...well...it's received
-sock.onmessage = function(event) {
-  term.eraseLine();
-  term.red(`<${sock._socket.remoteAddress}>: ${event.data}`);
-  term.moveTo(1, term.height);
-  term.green("\n<You>: ");
-};
+  const sock = new WebSocket(`ws://${ip}:9000`);
+
+  // When the connection is established, stop the spinner and begin the sending loop (aka recursion fun fun time)
+  sock.onopen = function() {
+    term.green('\nSocket succesfully connected.\n');
+    mainLoop(sock);
+  };
+
+  // Display received message when...well...it's received
+  sock.onmessage = function(event) {
+    term.moveTo(1, term.height);
+    term.red(`<${sock._socket.remoteAddress}>: ${event.data}`);
+    term.moveTo(1, term.height);
+    term.green("\n<You>: ");
+  };
+
+  // If the connection fails, try again after a short delay
+  sock.onerror = function(error) {
+    setTimeout(connect, 1000);
+  };
+}
 
 // Main loop to be executed recursively
-function mainLoop() {
+function mainLoop(sock) {
   term.green("\n<You>: ");
   term.inputField((error , input) => {
         sock.send(input);
-        mainLoop();
+        mainLoop(sock);
     }
   );
 }
 
+module.exports = { client };
