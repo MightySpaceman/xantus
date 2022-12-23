@@ -3,7 +3,7 @@ const term = require('terminal-kit').terminal;
 
 function client(ip) {
 
-  term.blue("Attempting to connect...");
+  term.blue("\nAttempting to connect...");
 
   const sock = new WebSocket(`ws://${ip}:9000`);
 

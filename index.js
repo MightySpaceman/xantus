@@ -32,7 +32,7 @@ term.singleColumnMenu(menuOptions, (error, response) => {
         break;
         
         case "Join specific IP":
-            term.blue("IP adress: ")
+            term.blue("\nIP adress: ")
             term.inputField((error, input) => {
                     client(input);
             });

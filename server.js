@@ -4,7 +4,7 @@ const term = require('terminal-kit').terminal;
 function server() {
 
 const wss = new WebSocket.Server({ port: 9000 });
-term.blue("Looking for connections...");
+term.blue("\nLooking for connections...");
 
 wss.on('connection', function connection(ws) {
   term.green(`\nSuccesful connection from ${ws._socket.remoteAddress}\n`)
