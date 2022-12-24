@@ -27,7 +27,7 @@ const menuOptions = ["Scan for rooms", "Join specific IP", "Host room"];
 term.singleColumnMenu(menuOptions, (error, response) => {
     switch (response.selectedText) {
         case "Scan for rooms": 
-        client("127.0.1.1");
+        client("127.0.1.1", 9000);
 
         break;
         

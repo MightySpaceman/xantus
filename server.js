@@ -11,7 +11,7 @@ wss.on('connection', function connection(ws) {
   mainLoop(ws);
   ws.on('message', function incoming(message) {
     term.moveTo(1, term.height);
-    term.red(`<${ws._socket.remoteAddress}>: ${message}`);
+    term.magenta(`<${ws._socket.remoteAddress}>: ${message}`);
     term.moveTo(1, term.height);
     term.green("\n<You>: ");
   });
@@ -19,6 +19,7 @@ wss.on('connection', function connection(ws) {
 
 // Main loop to be executed recursively
 function mainLoop(ws) {
+  term.moveTo(1, term.height);
   term.green("\n<You>: ");
   term.inputField((error , input) => {
         ws.send(input);

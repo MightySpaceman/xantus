@@ -16,7 +16,7 @@ function client(ip, port) {
   // Display received message when...well...it's received
   sock.onmessage = function(event) {
     term.moveTo(1, term.height);
-    term.red(`<${sock._socket.remoteAddress}>: ${event.data}`);
+    term.magenta(`<${sock._socket.remoteAddress}>: ${event.data}`);
     term.moveTo(1, term.height);
     term.green("\n<You>: ");
   };
@@ -29,6 +29,7 @@ function client(ip, port) {
 
 // Main loop to be executed recursively
 function mainLoop(sock) {
+  term.moveTo(1, term.height);
   term.green("\n<You>: ");
   term.inputField((error , input) => {
         sock.send(input);
